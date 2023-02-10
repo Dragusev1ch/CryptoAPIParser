@@ -1,4 +1,8 @@
-﻿using System;
+﻿using APIParser;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
 
 namespace WPF_PL
@@ -10,6 +14,30 @@ namespace WPF_PL
         {
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri("https://cryptingup.com/api/");
+        }
+        public static List<Currency> GetCryptocurrencies(out int next, int start = 0, int size = 10)
+        {
+            string requestPath = string.Empty;
+            if(start == 0)
+            {
+                requestPath = $"assets?size={size}";
+            }
+            else
+            {
+                requestPath = $"assets?start={start}&size={size}";
+            }
+            HttpResponseMessage responce = httpClient.GetAsync(requestPath).Result;
+            string response = responce.Content.ReadAsStringAsync().Result;
+            JObject jsonResponse = JObject.Parse(response);
+
+            string nextText = jsonResponse.SelectToken("next").ToString();
+            if (Int32.TryParse(nextText, out next) == false)
+            {
+                next = -1;
+            }
+            string currenciesList = jsonResponse.SelectToken("assets").ToString();
+            List<Currency> currencyList = JsonConvert.DeserializeObject<List<Currency>>(currenciesList);
+            return currencyList;
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_PL.View;
 
 namespace WPF_PL
 {
@@ -20,9 +21,20 @@ namespace WPF_PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void adjustWindowToScreen()
+        {
+            Width = SystemParameters.WorkArea.Width;
+            Height = SystemParameters.WorkArea.Height;
+
+            Top = 0;
+            Left = 0;
+        }
         public MainWindow()
         {
             InitializeComponent();
+            adjustWindowToScreen();
+            MainMenu mainMenu = new MainMenu();
+            ViewBox.Child = mainMenu;
         }
     }
 }
