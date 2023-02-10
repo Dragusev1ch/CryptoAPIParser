@@ -9,8 +9,8 @@ namespace APIParser
 {
     public class GetRequest
     {
-        HttpWebRequest _request;
-        string _addres;
+        private HttpWebRequest _request;
+        private string _addres;
 
         public Dictionary<string, string> Headers { get; set; }
 
