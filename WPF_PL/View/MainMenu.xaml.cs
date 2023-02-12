@@ -31,7 +31,14 @@ namespace WPF_PL.View
         }
         private void radioButtonMainPage_Checked(object sender, RoutedEventArgs e)
         {
-            
+            if (grid.Children.Count > 1)
+            {
+                grid.Children.RemoveAt(pageIndex);
+            }
+            mainPage = new MainPage();
+            mainPage.CurrencySelected += MainPage_CurrencySelected;
+            Grid.SetColumn(mainPage, 1);
+            grid.Children.Add(mainPage);
         }
 
         private void MainPage_CurrencySelected(object? sender, EventArgs e)

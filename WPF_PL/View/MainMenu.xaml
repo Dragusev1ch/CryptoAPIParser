@@ -12,10 +12,10 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel x:Name="stackPanelSideBar" Orientation="Vertical" Grid.Column="0" Margin="10,5,0,0">
-            <RadioButton x:Name="radioButtonMainPage"  Content="Main Page" GroupName="sidebarButtons" Margin="0,5" Checked="radioButtonMainPage_Checked"/>
-            <RadioButton x:Name="radioButtonCurrenciesList"   Content="Currencies List" GroupName="sidebarButtons" Margin="0,5" Checked="radioButtonCurrenciesList_Checked"/>
-            <RadioButton x:Name="radioButtonCurrenciesConverter"   Content="Currencies Converter" GroupName="sidebarButtons" Margin="0,5" Checked="radioButtonCurrenciesConverter_Checked"/>
+            <RadioButton x:Name="radioButtonMainPage"  Style="{StaticResource sideBarToggleButton}" Content="Main Page" GroupName="sidebarButtons" Margin="0,5" Checked="radioButtonMainPage_Checked"/>
+            <RadioButton x:Name="radioButtonCurrenciesList"  Style="{StaticResource sideBarToggleButton}" Content="Currencies List" GroupName="sidebarButtons" Margin="0,5" Checked="radioButtonCurrenciesList_Checked"/>
+            <RadioButton x:Name="radioButtonCurrenciesConverter"  Style="{StaticResource sideBarToggleButton}" Content="Currencies Converter" GroupName="sidebarButtons" Margin="0,5" Checked="radioButtonCurrenciesConverter_Checked"/>
 
         </StackPanel>
     </Grid>
-    </UserControl>
+</UserControl>

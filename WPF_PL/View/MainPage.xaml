@@ -9,6 +9,6 @@
     <StackPanel>
         <Label Content="Cryptocurrencies" HorizontalAlignment="Center"/>
         <Label Content="Cryptocurrencies ranking by trading volume"  HorizontalAlignment="Center" FontSize="14"/>
-        <local:CurrenciesList x:Name="currenciesList" Currencies="{Binding Currencies}" Loaded="currenciesList_Loaded"/>
+        <local:CurrenciesList x:Name="currenciesList" Currencies="{Binding Currencies}"/>
     </StackPanel>
 </UserControl>

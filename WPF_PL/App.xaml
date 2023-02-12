@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:WPF_PL"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="sideBarToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="ToggleButton">
+            <Setter Property="FontFamily" Value="Verdana" />
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
     </Application.Resources>
 </Application>
