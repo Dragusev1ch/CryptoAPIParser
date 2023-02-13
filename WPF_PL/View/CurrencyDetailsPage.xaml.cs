@@ -24,10 +24,19 @@ namespace WPF_PL.View
         public CurrencyDetailsViewModel CurrencyDetailsViewModel { get; set; }
         public CurrencyDetailsPage()
         {
-            InitializeComponent();
-            scrollViewer.MaxHeight = SystemParameters.WorkArea.Height;
-            CurrencyDetailsViewModel = new CurrencyDetailsViewModel(currencyToSet);
-            DataContext = CurrencyDetailsViewModel;
+            //InitializeComponent();
+            //scrollViewer.MaxHeight = SystemParameters.WorkArea.Height;
+            //CurrencyDetailsViewModel = new CurrencyDetailsViewModel(currencyToSet);
+            //DataContext = CurrencyDetailsViewModel;
+        }
+        private void buttonLoadMoreMarkets_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ButtonMarket_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

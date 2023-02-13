@@ -39,5 +39,29 @@ namespace WPF_PL
             List<Currency> currencyList = JsonConvert.DeserializeObject<List<Currency>>(currenciesList);
             return currencyList;
         }
+        public static List<Market> GetExchangeMarkets(string asset_id, out int next, int start = 0, int size = 10)
+        {
+            string requestPath = string.Empty;
+            if (start == 0)
+            {
+                requestPath = $"assets/{asset_id}/markets?size={size}";
+            }
+            else
+            {
+                requestPath = $"assets/{asset_id}/markets?start={start}&size={size}";
+            }
+            HttpResponseMessage response = httpClient.GetAsync(requestPath).Result;
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            JObject jsonResponse = JObject.Parse(responseBody);
+
+            string nextText = jsonResponse.SelectToken("next").ToString();
+            if (Int32.TryParse(nextText, out next) == false)
+            {
+                next = -1;
+            }
+            string marketsList = jsonResponse.SelectToken("markets").ToString();
+            List<Market> markets = JsonConvert.DeserializeObject<List<Market>>(marketsList);
+            return markets;
+        }
     }
 }
