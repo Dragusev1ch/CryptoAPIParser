@@ -1,4 +1,5 @@
 ﻿using APIParser;
+using APIParser.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -77,6 +78,16 @@ namespace WPF_PL
 
             Currency currency = JsonConvert.DeserializeObject<Currency>(asset);
             return currency;
+        }
+        public static List<CurrencyPreview> GetCurrenciesPreview()
+        {
+            string requestPath = "assetsoverview";
+            HttpResponseMessage response = httpClient.GetAsync(requestPath).Result;
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            JObject jsonResponse = JObject.Parse(responseBody);
+            string assets = jsonResponse.SelectToken("assets").ToString();
+            List<CurrencyPreview> currencyPreviews = JsonConvert.DeserializeObject<List<CurrencyPreview>>(assets);
+            return currencyPreviews;
         }
     }
 }

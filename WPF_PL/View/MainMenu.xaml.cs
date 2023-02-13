@@ -25,6 +25,7 @@ namespace WPF_PL.View
         MainPage mainPage { get; set; }
         CurrencyDetailsPage currencyDetailsPage { get; set; }
         CurrenciesListPage currenciesListPage { get; set; }
+        ConvertCurrenciesPage convertCurrenciesPage { get; set; }
 
         public MainMenu()
         {
@@ -70,12 +71,26 @@ namespace WPF_PL.View
 
         private void CurrenciesListPage_CurrencySelected(object? sender, EventArgs e)
         {
-            
+            radioButtonCurrenciesList.IsChecked = false;
+            CurrencyViewModel currency = sender as CurrencyViewModel;
+            if (grid.Children.Count > 1)
+            {
+                grid.Children.RemoveAt(pageIndex);
+            }
+            currencyDetailsPage = new CurrencyDetailsPage(currency.Currency);
+            Grid.SetColumn(currencyDetailsPage, 1);
+            grid.Children.Add(currencyDetailsPage);
         }
 
         private void radioButtonCurrenciesConverter_Checked(object sender, RoutedEventArgs e)
         {
-            
+            if (grid.Children.Count > 1)
+            {
+                grid.Children.RemoveAt(pageIndex);
+            }
+            convertCurrenciesPage = new ConvertCurrenciesPage();
+            Grid.SetColumn(convertCurrenciesPage, 1);
+            grid.Children.Add(convertCurrenciesPage);
         }
     }
 }

@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="WPF_PL.View.ConvertCurrenciesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_PL.View"
+mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Center" Grid.Column="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <Label Content="Filter"/>
+                <TextBox Text="{Binding FirstCurrencySearchText, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="First currency:"/>
+                <ComboBox x:Name="comboBoxFirstCurrency" ItemsSource="{Binding FirstCurrencyPreview.View}" IsSynchronizedWithCurrentItem="True" Width="150">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}_{1}">
+                                        <Binding Path="Asset_Id"/>
+                                        <Binding Path="Name"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Label DataContext="{Binding FirstCurrency}" Content="{Binding Price, Mode=TwoWay}" ContentStringFormat="Price: {0:C8}"/>
+
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <Label Content="Filter"/>
+                <TextBox Text="{Binding SecondCurrencySearchText, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Second currency:"/>
+                <ComboBox x:Name="comboBoxSecondCurrency" ItemsSource="{Binding SecondCurrencyPreview.View}" IsSynchronizedWithCurrentItem="True" Width="150">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}_{1}">
+                                        <Binding Path="Asset_Id"/>
+                                        <Binding Path="Name"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Label DataContext="{Binding SecondCurrency}" Content="{Binding Price}" ContentStringFormat="Price: {0:C8}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
+            <TextBox x:Name="textBoxFirstCurrencyAmount"  MinWidth="50" KeyUp="textBoxFirstCurrencyAmount_KeyUp">
+                <TextBox.Text>
+                    <Binding Path="FirstCurrencyValue" Mode="TwoWay" TargetNullValue="" FallbackValue="0" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="{Binding FirstCurrency.Asset_Id}"/>
+            <Label Content=" = "/>
+            <TextBox x:Name="textBoxSecondCurrencyAmount"  MinWidth="50" KeyUp="textBoxSecondCurrencyAmount_KeyUp">
+                <TextBox.Text>
+                    <Binding Path="SecondCurrencyValue" Mode="TwoWay" TargetNullValue="" FallbackValue="0" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="{Binding SecondCurrency.Asset_Id}"/>
+        </StackPanel>
+    </Grid>
+    </UserControl>

@@ -1,4 +1,5 @@
 ﻿using APIParser;
+using APIParser.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -24,20 +25,15 @@ public static class HttpService
         httpClient = new HttpClient();
         httpClient.BaseAddress = new Uri("https://cryptingup.com/api/");
     }
-    public static Currency GetCurrency(string asset_id)
+    public static List<CurrencyPreview> GetCurrenciesPreview()
     {
-        string requestPath = $"assets/{asset_id}";
+        string requestPath = "assetsoverview";
         HttpResponseMessage response = httpClient.GetAsync(requestPath).Result;
-        if (response.IsSuccessStatusCode == false)
-        {
-            return null;
-        }
         string responseBody = response.Content.ReadAsStringAsync().Result;
         JObject jsonResponse = JObject.Parse(responseBody);
-        string asset = jsonResponse.SelectToken("asset").ToString();
-
-        Currency currency = JsonConvert.DeserializeObject<Currency>(asset);
-        return currency;
+        string assets = jsonResponse.SelectToken("assets").ToString();
+        List<CurrencyPreview> currencyPreviews = JsonConvert.DeserializeObject<List<CurrencyPreview>>(assets);
+        return currencyPreviews;
     }
 }
 public class MarketViewModel
