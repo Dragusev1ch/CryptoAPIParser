@@ -23,6 +23,8 @@ namespace WPF_PL.View
     {
         const int pageIndex = 1;
         MainPage mainPage { get; set; }
+        CurrencyDetailsPage currencyDetailsPage { get; set; }
+        CurrenciesListPage currenciesListPage { get; set; }
 
         public MainMenu()
         {
@@ -43,12 +45,27 @@ namespace WPF_PL.View
 
         private void MainPage_CurrencySelected(object? sender, EventArgs e)
         {
-           
+            radioButtonMainPage.IsChecked = false;
+            CurrencyViewModel currency = sender as CurrencyViewModel;
+            if (grid.Children.Count > 1)
+            {
+                grid.Children.RemoveAt(pageIndex);
+            }
+            currencyDetailsPage = new CurrencyDetailsPage(currency.Currency);
+            Grid.SetColumn(currencyDetailsPage, 1);
+            grid.Children.Add(currencyDetailsPage);
         }
 
         private void radioButtonCurrenciesList_Checked(object sender, RoutedEventArgs e)
         {
-            
+            if (grid.Children.Count > 1)
+            {
+                grid.Children.RemoveAt(pageIndex);
+            }
+            currenciesListPage = new CurrenciesListPage();
+            currenciesListPage.CurrencySelected += CurrenciesListPage_CurrencySelected;
+            Grid.SetColumn(currenciesListPage, 1);
+            grid.Children.Add(currenciesListPage);
         }
 
         private void CurrenciesListPage_CurrencySelected(object? sender, EventArgs e)

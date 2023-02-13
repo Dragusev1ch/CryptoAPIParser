@@ -37,13 +37,13 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Content="Pair" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Label Content="Price USD" Grid.Column="1" HorizontalAlignment="Center"/>
-                <Label Content="Price Unconverted" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Change 24h" Grid.Column="3" HorizontalAlignment="Center"/>
-                <Label Content="Spread" Grid.Column="4" HorizontalAlignment="Center"/>
-                <Label Content="Volume 24h" Grid.Column="5" HorizontalAlignment="Center"/>
-                <Label Content="Exchange" Grid.Column="6" HorizontalAlignment="Center"/>
+                <Label Content="Pair" Grid.Column="0" HorizontalAlignment="Left"/>
+                <Label Content="Price USD" Grid.Column="1" HorizontalAlignment="Left"/>
+                <Label Content="Price Unconverted" Grid.Column="2" HorizontalAlignment="Left"/>
+                <Label Content="Change 24h" Grid.Column="3" HorizontalAlignment="Left"/>
+                <Label Content="Spread" Grid.Column="4" HorizontalAlignment="Left"/>
+                <Label Content="Volume 24h" Grid.Column="5" HorizontalAlignment="Left"/>
+                <Label Content="Exchange" Grid.Column="6" HorizontalAlignment="Left"/>
             </Grid>
             <Rectangle HorizontalAlignment="Stretch" Fill="Black" Height="2"/>
             <ItemsControl x:Name="marketsList" ItemsSource="{Binding MarketViewModels}">
@@ -60,13 +60,13 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{Binding Symbol}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Price}" ContentStringFormat="{}{0:C8}" Grid.Column="1" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Price_Unconverted}" ContentStringFormat="{}{0:C8}"  Grid.Column="2" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Path=Change_24h}" Foreground="{Binding Change_24h, Converter={StaticResource numberToColorConverter}}" ContentStringFormat="{}{0:0.##}%" Grid.Column="3" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Path=Spread}" ContentStringFormat="{}{0:0.########}%" Grid.Column="4" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Path=Volume_24h}" ContentStringFormat="{}{0:C}" Grid.Column="5" HorizontalAlignment="Center"/>
-                                <Label Content="{Binding Exchange_Id}" FontWeight="Bold" Grid.Column="6" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding Symbol}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Price}" ContentStringFormat="{}{0:C8}" Grid.Column="1" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Price_Unconverted}" ContentStringFormat="{}{0:C8}"  Grid.Column="2" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Path=Change_24h}" Foreground="{Binding Change_24h}" ContentStringFormat="{}{0:0.##}%" Grid.Column="3" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Path=Spread}" ContentStringFormat="{}{0:0.########}%" Grid.Column="4" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Path=Volume_24h}" ContentStringFormat="{}{0:C}" Grid.Column="5" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Exchange_Id}" FontWeight="Bold" Grid.Column="6" HorizontalAlignment="Left"/>
                             </Grid>
                         </Button>
                     </DataTemplate>

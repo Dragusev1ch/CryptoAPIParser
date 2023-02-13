@@ -63,5 +63,20 @@ namespace WPF_PL
             List<Market> markets = JsonConvert.DeserializeObject<List<Market>>(marketsList);
             return markets;
         }
+        public static Currency GetCurrency(string asset_id)
+        {
+            string requestPath = $"assets/{asset_id}";
+            HttpResponseMessage response = httpClient.GetAsync(requestPath).Result;
+            if (response.IsSuccessStatusCode == false)
+            {
+                return null;
+            }
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            JObject jsonResponse = JObject.Parse(responseBody);
+            string asset = jsonResponse.SelectToken("asset").ToString();
+
+            Currency currency = JsonConvert.DeserializeObject<Currency>(asset);
+            return currency;
+        }
     }
 }

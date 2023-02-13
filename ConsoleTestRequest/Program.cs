@@ -13,13 +13,7 @@ using System.Runtime.CompilerServices;
 //var json = JObject.Parse(response);
 //Console.WriteLine(json);
 
-Currency currencyToSet = new Currency();
-int marketNextPageStartId = 0;
-List<MarketViewModel> marketsList = HttpService.GetExchangeMarkets("BTC", out marketNextPageStartId).Select(m => new MarketViewModel(m)).ToList();
-foreach (var item in marketsList)
-{
-    Console.WriteLine(item);
-}
+
 
 
 public static class HttpService
@@ -30,29 +24,20 @@ public static class HttpService
         httpClient = new HttpClient();
         httpClient.BaseAddress = new Uri("https://cryptingup.com/api/");
     }
-    public static List<Market> GetExchangeMarkets(string asset_id, out int next, int start = 0, int size = 10)
+    public static Currency GetCurrency(string asset_id)
     {
-        string requestPath = string.Empty;
-        if (start == 0)
-        {
-            requestPath = $"assets/{asset_id}/markets?size={size}";
-        }
-        else
-        {
-            requestPath = $"assets/{asset_id}/markets?start={start}&size={size}";
-        }
+        string requestPath = $"assets/{asset_id}";
         HttpResponseMessage response = httpClient.GetAsync(requestPath).Result;
+        if (response.IsSuccessStatusCode == false)
+        {
+            return null;
+        }
         string responseBody = response.Content.ReadAsStringAsync().Result;
         JObject jsonResponse = JObject.Parse(responseBody);
+        string asset = jsonResponse.SelectToken("asset").ToString();
 
-        string nextText = jsonResponse.SelectToken("next").ToString();
-        if (Int32.TryParse(nextText, out next) == false)
-        {
-            next = -1;
-        }
-        string marketsList = jsonResponse.SelectToken("markets").ToString();
-        List<Market> markets = JsonConvert.DeserializeObject<List<Market>>(marketsList);
-        return markets;
+        Currency currency = JsonConvert.DeserializeObject<Currency>(asset);
+        return currency;
     }
 }
 public class MarketViewModel
