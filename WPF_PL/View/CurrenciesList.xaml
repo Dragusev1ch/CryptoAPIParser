@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              
              
-             xmlns:local="clr-namespace:WPF_PL.View"
+             xmlns:converter="clr-namespace:WPF_PL.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+    <UserControl.Resources>
+        <converter:NumberToColorConverter x:Key="numberToColorConverter" />
+    </UserControl.Resources>
     <StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -48,9 +50,9 @@
                                 <Label Content="{Binding Path=Name}"/>
                             </StackPanel>
                             <Label Content="{Binding Path=Price}" ContentStringFormat="{}{0:C8}" Grid.Column="1" HorizontalAlignment="Left"/>
-                            <Label Content="{Binding Path=Change_1h}" Foreground="{Binding Path=Change_1h}" ContentStringFormat="{}{0:0.##}%"  Grid.Column="2" HorizontalAlignment="Left"/>
-                            <Label Content="{Binding Path=Change_24h}" Foreground="{Binding Path=Change_24h}" ContentStringFormat="{}{0:0.##}%" Grid.Column="3" HorizontalAlignment="Left"/>
-                            <Label Content="{Binding Path=Change_7d}" Foreground="{Binding Path=Change_7d}" ContentStringFormat="{}{0:0.##}%" Grid.Column="4" HorizontalAlignment="Left"/>
+                            <Label Content="{Binding Path=Change_1h}" Foreground="{Binding Path=Change_1h, Converter={StaticResource numberToColorConverter}}" ContentStringFormat="{}{0:0.##}%"  Grid.Column="2" HorizontalAlignment="Left"/>
+                            <Label Content="{Binding Path=Change_24h}" Foreground="{Binding Path=Change_24h, Converter={StaticResource numberToColorConverter}}" ContentStringFormat="{}{0:0.##}%" Grid.Column="3" HorizontalAlignment="Left"/>
+                            <Label Content="{Binding Path=Change_7d}" Foreground="{Binding Path=Change_7d, Converter={StaticResource numberToColorConverter}}" ContentStringFormat="{}{0:0.##}%" Grid.Column="4" HorizontalAlignment="Left"/>
                             <Label Content="{Binding Path=Volume_24h}"  ContentStringFormat="{}{0:C}" Grid.Column="5" HorizontalAlignment="Left"/>
                             <Label Content="{Binding Path=Market_Cap}" ContentStringFormat="{}{0:C}" Grid.Column="6" HorizontalAlignment="Left"/>
                         </Grid>

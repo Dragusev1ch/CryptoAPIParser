@@ -45,5 +45,10 @@ namespace WPF_PL.View
             CurrencyDetailsViewModel.LinkToMarket(marketViewModel);
 
         }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
